@@ -1,0 +1,74 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="bulma.light.css" />
+    <link rel="stylesheet" href="bulma.custom.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <nav class="navbar has-shadow">
+      <div class="container">
+        <div class="navbar-brand">
+          <a use:inertia class="navbar-item" href="/">
+            <img class="index-logo" src="logo.svg" alt="Logo" />
+          </a>
+        </div>
+        <div class:is-active="{active}" class="navbar-menu">
+          <div class="navbar-start">
+            <a
+              use:inertia
+              class="navbar-item"
+              href="https://discord.gg/zwX6MUr4ud"
+            >
+              Discord
+            </a>
+            <a
+              use:inertia
+              class="navbar-item"
+              href="https://twitter.com/vistoraofficial"
+            >
+              Twitter
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <style>
+      .index-hero {
+        background-image: linear-gradient(
+            to right,
+            rgba(0, 0, 0, 0),
+            rgba(121, 87, 213, 0.15)
+          ),
+          url(unknown.png);
+        height: 100%;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background: linear-gradient(0deg, #00000088 30%);
+      }
+    </style>
+    <section class="index-hero hero is-fullheight">
+      <div class="hero-body">
+        <div class="container">
+          <div class="columns is-centered">
+            <div class="column is-12 has-text-pulled-left">
+              <div class="title is-1 has-text-weight-normal mb-2">
+                Farewell, Vistora.
+              </div>
+              <div
+                class="title is-5 has-text-grey-light has-font-weight-light mb-3"
+              >
+                Our heartfelt appreciations for those who accompanied
+                <br />
+                us throughout this unmatched journey.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

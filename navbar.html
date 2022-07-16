@@ -1,0 +1,193 @@
+<script>
+
+    import { Inertia } from '@inertiajs/inertia'
+    import { inertia, page } from '@inertiajs/inertia-svelte'
+    
+    import Render from './user/render.svelte'
+
+    let active = false
+
+    Inertia.on('success', () => {
+        active = false
+    })
+
+</script>
+
+<nav class="navbar is-spaced has-shadow">
+
+    <div class="container">
+
+        <div class="navbar-brand">
+
+            <a use:inertia class="navbar-item" href={ route('index') }>
+                <img class="index-logo" src="https://cdn.vistora.xyz/images/halloween/logo.svg" alt="">
+            </a>
+
+            <a class:is-active={active} on:click={() => active = !active} href="#" role="button" class="navbar-burger">
+                
+                <span></span>
+                <span></span>
+                <span></span>
+
+            </a>
+
+        </div>
+
+        <div class:is-active={active} class="navbar-menu">
+
+            <div class="navbar-start">  
+                    
+                    <a use:inertia class="navbar-item" href={ route('index') }>
+                        Home
+                    </a>
+
+
+                    <a use:inertia class="navbar-item" href={ route('user.dashboard') }>
+                        Dashboard
+                    </a>
+
+                {/if}
+
+                <a use:inertia class="navbar-item" href={ route('store') }>
+                    Store
+                </a>
+
+                <a use:inertia class="navbar-item" href={ route('forum') }>
+                    Forum
+                </a>
+
+                <a use:inertia class="navbar-item" href={ route('user.discover') }>
+                    Discover
+                </a>
+
+                {#if $page.props.can.mod}
+
+                    <a use:inertia class="navbar-item has-text-danger" href={ route('admin') }>
+                        Admin
+                    </a>
+
+                {/if}
+
+                <div class="navbar-item has-dropdown is-hoverable">
+    
+                    <a href="#" class="navbar-link">
+                        More
+                    </a>
+
+                    <div class="navbar-dropdown">
+
+                        <a use:inertia href={ route("user.indexing") } class="navbar-item">
+                            <i class="fal fa-align-left"></i>&nbsp;&nbsp;Public Indexing
+                        </a>
+
+                        <a use:inertia href={ route("user.leaderboard") } class="navbar-item">
+                            <i class="fad fa-people-arrows"></i>&nbsp;&nbsp;Compete
+                        </a>
+
+                        <a use:inertia href={ route("user.promocodes") } class="navbar-item">
+                            <i class="fad fa-dollar-sign"></i>&nbsp;&nbsp;Promocodes
+                        </a>
+
+                        <hr class="navbar-divider">
+                        
+                        <a target="_blank" href="https://twitter.com/vistoraofficial" class="navbar-item">
+                            <i class="fab fa-twitter"></i>&nbsp;&nbsp;Twitter
+                        </a>
+
+                        <a target="_blank" href="https://discord.gg/qwRYqbrBmG" class="navbar-item">
+                            <i class="fab fa-discord"></i>&nbsp;&nbsp;Discord
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="navbar-end">
+
+                {#if !$page.props.local.auth}
+
+                    <div class="navbar-item">
+
+                        <div class="buttons">
+
+                            <a use:inertia href={ route('auth.login') } class="button is-light">
+                                Login
+                            </a>
+
+                            <a use:inertia href={ route('auth.register') } class="button is-info">
+                                <strong>Hop in!</strong>
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                {:else}
+
+                    <div class="navbar-item">
+
+                        <a use:inertia href={ route('user.relations') } class="navbar-item tooltip is-tooltip-bottom" data-tooltip="Relations">
+                            <i class="fad fa-handshake"></i>
+                        </a>  
+                        
+                        <a use:inertia href={ route('user.trades') } class="navbar-item tooltip is-tooltip-bottom" data-tooltip="Trades">
+                            <i class="fad fa-people-arrows"></i>
+                        </a>  
+
+                        <a use:inertia href={ route('user.transactions') } class="navbar-item tooltip is-tooltip-bottom" data-tooltip="Transactions">
+                            { $page.props.local.auth.balance } Vens
+                        </a>
+
+                        <div class="navbar-item has-dropdown is-hoverable">
+
+                            <a use:inertia class="navbar-link"  href={ route('user.profile', $page.props.local.auth.username) }>
+
+                                <span class="navbar-headshot is-hidden-mobile">
+
+                                    <Render hash = { $page.props.local.auth.render_key + "_headshot" } classes = "navbar-headshot-image" />
+
+                                </span>
+
+                                { $page.props.local.auth.username }
+
+                            </a>
+
+                            <div class="navbar-dropdown is-boxed is-right">
+
+                                <a use:inertia class="navbar-item" href={ route('user.profile', $page.props.local.auth.username) }>
+                                    <i class="fad fa-user"></i>&nbsp;&nbsp;Profile
+                                </a>
+
+                                <a use:inertia class="navbar-item" href={ route('user.avatar') }>
+                                    <i class="fad fa-sparkles"></i>&nbsp;&nbsp;Avatar
+                                </a>
+
+                                <a use:inertia class="navbar-item" href={ route('user.profile.inventory', $page.props.local.auth.username) }>
+                                    <i class="fad fa-suitcase"></i>&nbsp;&nbsp;Inventory
+                                </a>
+
+                                <a use:inertia class="navbar-item" href={ route('user.settings') }>
+                                    <i class="fad fa-user-cog"></i>&nbsp;&nbsp;Settings
+                                </a>
+
+                                <hr class="navbar-divider">
+
+                                <a use:inertia="{{ method: 'post' }}" href={ route('auth.logout') } class="navbar-item has-text-danger">
+                                    <i class="fal fa-power-off"></i>&nbsp;&nbsp;Sign Out
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</nav>
