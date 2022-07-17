@@ -2,6 +2,6 @@
 
 # [vis.kqpa.me](https://vis.kqpa.me)
 
-#### Memorial site for Vistora
+#### Memorial for Vistora
 
 </div>
